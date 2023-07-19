@@ -1,9 +1,10 @@
 package com.luis.parcial.controller;
+
 import com.luis.parcial.document.Persona;
 import com.luis.parcial.dto.NewNameDto;
 import com.luis.parcial.dto.PersonaDto;
-import org.bson.types.ObjectId;
 import com.luis.parcial.service.PersonaService;
+import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,10 +26,10 @@ public class PersonaController {
         return ResponseEntity.ok("Persona eliminada correctamente");
     }
     @PutMapping("/save/{id}")
-    public ResponseEntity<Persona> update(@RequestBody NewNameDto dto, @PathVariable ObjectId id) {
+    public ResponseEntity<Persona> update(@RequestBody NewNameDto dto, @PathVariable String id) {
         return ResponseEntity.ok(personaService.save(
-                personaService.getById(id).setFull_name(dto.name())
-        ));
+                personaService.getById(new ObjectId(id)).setFull_name(dto.getName()))
+        );
     }
 
 
@@ -36,7 +37,7 @@ public class PersonaController {
     public ResponseEntity<Persona> add(@RequestBody PersonaDto dto ) {
         return ResponseEntity.ok(personaService.add(
                 new Persona()
-                        .setId(new ObjectId())
+                        .set_id(new ObjectId())
                         .setEmail(dto.email())
                         .setPhone(dto.phone())
                         .setFull_name(dto.full_name())

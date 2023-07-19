@@ -4,12 +4,12 @@ import com.luis.parcial.document.Persona;
 import com.luis.parcial.repository.PersonaRepository;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PersonaService {
-    private PersonaRepository personaRepository;
+    private final PersonaRepository personaRepository;
     public PersonaService(PersonaRepository personaRepository){
         this.personaRepository = personaRepository;
     }
