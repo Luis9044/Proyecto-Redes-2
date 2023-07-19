@@ -20,12 +20,12 @@ public class PersonaController {
     public ResponseEntity<?> allNames() {
         return ResponseEntity.ok(personaService.all());
     }
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> eliminarPersona(@PathVariable String id) {
         personaService.delete(new ObjectId(id));
         return ResponseEntity.ok("Persona eliminada correctamente");
     }
-    @PutMapping("/save/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Persona> update(@RequestBody NewNameDto dto, @PathVariable String id) {
         return ResponseEntity.ok(personaService.save(
                 personaService.getById(new ObjectId(id)).setFull_name(dto.getName()))
@@ -45,5 +45,8 @@ public class PersonaController {
         ));
     }
 
-
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Persona> getById(@PathVariable String id) {
+        return ResponseEntity.ok(personaService.getById(new ObjectId(id)));
+    }
 }
